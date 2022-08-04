@@ -1,0 +1,104 @@
+<div class="root-form">
+  <ng-container
+    *ngIf="selectedClass && selectedClass != null && classesData.length > 0"
+  >
+    <h1>SHOWING CLASS - {{ selectedClass.id }}</h1>
+
+    <div class="flexed">
+      Select a school -
+      <select
+        name="school"
+        id="school-select"
+        [(ngModel)]="selectedClass.schoolId"
+      >
+        <option
+          *ngFor="let schoolData of schoolsData"
+          [ngValue]="schoolData.id"
+        >
+          {{ schoolData.name }}
+        </option>
+      </select>
+    </div>
+
+    <br />
+    <div
+      *ngFor="
+        let student of selectedClass.students;
+        let studentSequence = index
+      "
+    >
+      <div class="student-input">
+        <p>Student {{ studentSequence + 1 }} :</p>
+        <select
+          name="student"
+          id="student-select"
+          [(ngModel)]="student.studentId"
+        >
+          <option *ngFor="let sData of studentsData" [ngValue]="sData.id">
+            {{ sData.firstname }} &nbsp; {{ sData.lastname }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <br />
+    <button (click)="addStudent()">Add Student</button>
+    <br />
+    <div class="flexed mt-1">
+      Status -
+      <input
+        type="text"
+        placeholder="Type Status here"
+        [(ngModel)]="selectedClass.status"
+      />
+    </div>
+  </ng-container>
+</div>
+
+<br />
+<br />
+
+<div
+  *ngIf="selectedClass && selectedClass != null && classesData.length > 0"
+  class="flexed"
+>
+  Class to show -
+  <select
+    name="class"
+    id="class-select"
+    [(ngModel)]="selectedClass"
+    (change)="onClassChange($event)"
+  >
+    <option *ngFor="let classData of classesData" [ngValue]="classData">
+      Class - {{ classData.id }}
+    </option>
+  </select>
+</div>
+
+<br />
+<p *ngIf="classesData.length <= 0">You do not have any classes</p>
+<button (click)="addClass()">
+  {{ classesData.length > 0 ? 'Add Another Class' : 'Add A Class' }}
+</button>
+<br />
+<br />
+
+<button
+  (click)="deleteClass()"
+  *ngIf="selectedClass && selectedClass != null && classesData.length > 0"
+>
+  Delete Current Class
+</button>
+
+<!-- 
+"id": "1",
+  "school-id": "1",
+  "students": [
+    {
+      "student-id": "B102",
+      "assignment": ""
+    }
+  ],
+  "status": "ACTIVE"
+
+ -->

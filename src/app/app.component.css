@@ -1,0 +1,21 @@
+.root-form {
+  display: flex;
+  flex-direction: column;
+}
+
+p {
+  font-family: Lato;
+}
+
+.student-input {
+  display: flex;
+  align-items: center;
+}
+
+.flexed{
+  display: flex;
+}
+
+.mt-1{
+  margin-top: 20px;
+}
